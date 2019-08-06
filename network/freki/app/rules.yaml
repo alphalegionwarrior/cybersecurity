@@ -1,0 +1,26 @@
+version: 1
+rules:
+  - match: tcp dst port 22 and src host 1.2.3.4
+    type: passthrough
+  - match: tcp dst port 10022
+    type: rewrite
+    target: 22
+  - match: tcp dst port 6379
+    type: proxy
+    target: docker://redis:6379
+  - match: tcp dst port 666
+    type: proxy
+    target: tcp://portquiz.net:666
+  - match: tcp port 80 or tcp port 8080
+    type: log_http
+  - match: tcp portrange 5000-5010
+    type: drop
+  - match: tcp portrange 7000-8000
+    type: conn_handler
+    target: echo
+  - match: tcp port 8888
+    type: drop
+  - match: tcp
+    type: log_tcp
+  - match:
+    type: passthrough

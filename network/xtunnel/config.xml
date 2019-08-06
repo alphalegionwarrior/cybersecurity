@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<tunnel name="openvpn tunnel">
+		<local port="1194" />
+		<remote host="1.2.3.4" port="6442" />
+	</tunnel>
+</config>

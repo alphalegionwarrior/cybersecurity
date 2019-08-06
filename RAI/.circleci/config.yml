@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0 
+            apk update && apk add sudo
+      - run:
+          name: Build Empire docker image
+          command: |
+            docker build -t rai/empire AttackServers/Empire/
+      - run:
+          name: Build CobaltStrike docker image
+          command: |
+            docker build --build-arg cskey="${CIRCLE_CS_KEY}" -t rai/cs AttackServers/CobaltStrike/
+      - run:
+          name: Build GoPhish docker image
+          command: |
+            docker build -t repo/gophish:1.0 GoPhish/
+      - run:
+          name: Build HTTP Redirector
+          command: |
+            docker build --build-arg TEAM_SERVER="${TEST_URL}:80" --build-arg LPORT=80 -t rai/http:1.0 Redirectors/HTTP
+      - run:
+          name: Build HTTPS Redirector
+          command: |
+            docker build --build-arg TEAM_SERVER="${TEST_URL_HTTPS}:443" --build-arg LPORT=443 -t rai/https:1.0 Redirectors/HTTPS 
+ 
