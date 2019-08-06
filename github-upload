@@ -1,0 +1,9 @@
+#!/bin/bash
+
+git init
+git config --global user.name alphalegionwarrior
+git config --global user.email alphalegionwarrior@gmail.com
+git add .
+git commit -m "upload"
+git remote add origin https://github.com/alphalegionwarrior/cybersecurity.git
+git push origin master
